@@ -4,6 +4,7 @@ package fr.free.nrw.commons.category;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import org.mediawiki.api.ApiResult;
@@ -11,10 +12,11 @@ import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.nrw.commons.CommonsApplication;
 
-public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
+public class MethodAUpdater extends AsyncTask<Void, Void, Pair<String, List<String>>> {
 
     public AsyncResponse delegate = null;
 
@@ -36,23 +38,37 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         catFragment.categoriesSkip.setVisibility(View.GONE);
     }
 
+
     @Override
-    protected void onPostExecute(ArrayList<String> categories) {
-        super.onPostExecute(categories);
+    protected void onPostExecute(Pair<String,List<String>> pair) {
+        super.onPostExecute(pair);
+        String type = pair.first;
+        List<String> categories = pair.second;
         catFragment.setCatsAfterAsync(categories, filter);
-        delegate.processFinish("test", categories);
+        //TODO: Return its own List
+        delegate.processFinish(type, categories);
+
+
     }
 
+
     @Override
-    protected ArrayList<String> doInBackground(Void... voids) {
+    protected Pair<String, List<String>> doInBackground(Void... voids) {
+        //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
-            return catFragment.recentCatQuery();
+            String type = "empty";
+            Pair pair = Pair.create(type, catFragment.recentCatQuery());
+            return pair;
         }
 
+        //if user types in something that is in cache, return cached category
         if(catFragment.categoriesCache.containsKey(filter)) {
-            return catFragment.categoriesCache.get(filter);
+            String type = "cache";
+            Pair pair = Pair.create(type, catFragment.categoriesCache.get(filter));
+            return pair;
         }
 
+        //otherwise if user has typed something in that isn't in cache, search API for matching categories
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
         ArrayList<String> categories = new ArrayList<String>();
@@ -73,13 +89,16 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
+
         for(ApiResult categoryNode: categoryNodes) {
-            String cat = categoryNode.getDocument().getTextContent();
-            String catString = cat.replace("Category:", "");
-            categories.add(catString);
+            categories.add(categoryNode.getDocument().getTextContent());
         }
 
         catFragment.categoriesCache.put(filter, categories);
-        return categories;
+
+        String type = "filter";
+        Pair pair = Pair.create(type, categories);
+        return pair;
+
     }
 }

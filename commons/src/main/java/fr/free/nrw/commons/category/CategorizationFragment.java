@@ -326,13 +326,13 @@ public class CategorizationFragment extends SherlockFragment implements AsyncRes
 
 
         prefixUpdater = new PrefixUpdater(this);
-        //methodAUpdater = new MethodAUpdater(this);
+        methodAUpdater = new MethodAUpdater(this);
 
         prefixUpdater.delegate = this;
-        //methodAUpdater.delegate = this;
+        methodAUpdater.delegate = this;
 
         Utils.executeAsyncTask(prefixUpdater, executor);
-        //Utils.executeAsyncTask(methodAUpdater, executor);
+        Utils.executeAsyncTask(methodAUpdater, executor);
 
 
     }
