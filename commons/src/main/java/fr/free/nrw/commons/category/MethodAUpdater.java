@@ -16,9 +16,15 @@ import fr.free.nrw.commons.CommonsApplication;
 
 public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
+    public AsyncResponse delegate = null;
+
     private String filter;
     private static final String TAG = MethodAUpdater.class.getName();
     CategorizationFragment catFragment = new CategorizationFragment();
+
+    public MethodAUpdater(CategorizationFragment catFragment) {
+        this.catFragment = catFragment;
+    }
 
     @Override
     protected void onPreExecute() {
@@ -34,6 +40,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected void onPostExecute(ArrayList<String> categories) {
         super.onPostExecute(categories);
         catFragment.setCatsAfterAsync(categories, filter);
+        delegate.processFinish(categories);
     }
 
     @Override

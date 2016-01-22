@@ -15,13 +15,9 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import fr.free.nrw.commons.Utils;
-import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,7 +27,7 @@ import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 
-public class CategorizationFragment extends SherlockFragment{
+public class CategorizationFragment extends SherlockFragment implements AsyncResponse{
     public static interface OnCategoriesSaveHandler {
         public void onCategoriesSave(ArrayList<String> categories);
     }
@@ -43,7 +39,7 @@ public class CategorizationFragment extends SherlockFragment{
     TextView categoriesSkip;
 
     CategoriesAdapter categoriesAdapter;
-    PrefixUpdater lastUpdater = null;
+    PrefixUpdater prefixUpdater = null;
     MethodAUpdater methodAUpdater = null;
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
 
@@ -330,8 +326,8 @@ public class CategorizationFragment extends SherlockFragment{
     }
 
     private void startUpdatingCategoryList() {
-        if (lastUpdater != null) {
-            lastUpdater.cancel(true);
+        if (prefixUpdater != null) {
+            prefixUpdater.cancel(true);
         }
 
         if (methodAUpdater != null) {
@@ -341,20 +337,32 @@ public class CategorizationFragment extends SherlockFragment{
 
         ArrayList<CategoryItem> itemList = new ArrayList<CategoryItem>(itemSet);
 
-        methodAUpdater = new MethodAUpdater();
-        lastUpdater = new PrefixUpdater();
 
-        Utils.executeAsyncTask(lastUpdater, executor);
+        prefixUpdater = new PrefixUpdater(this);
+        methodAUpdater = new MethodAUpdater(this);
+
+        prefixUpdater.delegate = this;
+        methodAUpdater.delegate = this;
+
+        Utils.executeAsyncTask(prefixUpdater, executor);
         Utils.executeAsyncTask(methodAUpdater, executor);
 
 
+    }
+
+    public void processFinish(ArrayList<String> output){
+        //Here you will receive the result fired from async class
+        //of onPostExecute(result) method.
+
+        Log.d(TAG, "After processFinish, received arraylist " + output);
+
+        /*
         categoriesAdapter.setItems(itemList);
         Log.d(TAG, "After AsyncTask over, set items in adapter to " + itemList.toString());
 
         categoriesAdapter.notifyDataSetInvalidated();
         categoriesSearchInProgress.setVisibility(View.GONE);
-
-
+        */
     }
 
     @Override

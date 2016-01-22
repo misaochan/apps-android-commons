@@ -14,11 +14,17 @@ import java.util.ArrayList;
 import fr.free.nrw.commons.CommonsApplication;
 
 public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
-    //TODO: Return type?
+
+    public AsyncResponse delegate = null;
 
     private String filter;
     private static final String TAG = PrefixUpdater.class.getName();
-    CategorizationFragment catFragment = new CategorizationFragment();
+    private CategorizationFragment catFragment;
+
+    public PrefixUpdater(CategorizationFragment catFragment) {
+        this.catFragment = catFragment;
+    }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -34,6 +40,8 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         super.onPostExecute(categories);
         catFragment.setCatsAfterAsync(categories, filter);
         //TODO: Return its own List
+        delegate.processFinish(categories);
+
 
     }
 
@@ -70,6 +78,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         catFragment.categoriesCache.put(filter, categories);
+
         return categories;
     }
 }
