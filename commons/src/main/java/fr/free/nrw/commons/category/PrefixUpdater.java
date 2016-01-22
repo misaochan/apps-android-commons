@@ -3,6 +3,7 @@ package fr.free.nrw.commons.category;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import org.mediawiki.api.ApiResult;
@@ -14,7 +15,7 @@ import java.util.List;
 
 import fr.free.nrw.commons.CommonsApplication;
 
-public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
+public class PrefixUpdater extends AsyncTask<Void, Void, Pair<String, List<String>>> {
 
     public AsyncResponse delegate = null;
 
@@ -37,25 +38,31 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
     }
 
     @Override
-    protected void onPostExecute(List<String> categories) {
-        super.onPostExecute(categories);
+    protected void onPostExecute(Pair<String,List<String>> pair) {
+        super.onPostExecute(pair);
+        String type = pair.first;
+        List<String> categories = pair.second;
         catFragment.setCatsAfterAsync(categories, filter);
         //TODO: Return its own List
-        delegate.processFinish(categories);
+        delegate.processFinish(type, categories);
 
 
     }
 
     @Override
-    protected ArrayList<String> doInBackground(Void... voids) {
+    protected Pair<String, List<String>> doInBackground(Void... voids) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
-            return catFragment.recentCatQuery();
+            String type = "empty";
+            Pair pair = Pair.create(type, catFragment.recentCatQuery());
+            return pair;
         }
 
         //if user types in something that is in cache, return cached category
         if(catFragment.categoriesCache.containsKey(filter)) {
-            return catFragment.categoriesCache.get(filter);
+            String type = "cache";
+            Pair pair = Pair.create(type, catFragment.categoriesCache.get(filter));
+            return pair;
         }
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
@@ -80,6 +87,9 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
 
         catFragment.categoriesCache.put(filter, categories);
 
-        return categories;
+        String type = "filter";
+        Pair pair = Pair.create(type, categories);
+        return pair;
+
     }
 }

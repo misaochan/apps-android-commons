@@ -144,20 +144,6 @@ public class CategorizationFragment extends SherlockFragment implements AsyncRes
         //itemSet.addAll(items);
         //Log.d(TAG, "Item Set" + itemSet.toString());
 
-
-        if (categories.size() == 0) {
-            if(TextUtils.isEmpty(filter)) {
-                // If we found no recent cats, show the skip message!
-                categoriesSkip.setVisibility(View.VISIBLE);
-            } else {
-                categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
-                categoriesNotFoundView.setVisibility(View.VISIBLE);
-            }
-        } else {
-            categoriesList.smoothScrollToPosition(existingKeys.size());
-        }
-
-
     }
 
     private class CategoriesAdapter extends BaseAdapter {
@@ -340,24 +326,27 @@ public class CategorizationFragment extends SherlockFragment implements AsyncRes
 
 
         prefixUpdater = new PrefixUpdater(this);
-        methodAUpdater = new MethodAUpdater(this);
+        //methodAUpdater = new MethodAUpdater(this);
 
         prefixUpdater.delegate = this;
-        methodAUpdater.delegate = this;
+        //methodAUpdater.delegate = this;
 
         Utils.executeAsyncTask(prefixUpdater, executor);
-        Utils.executeAsyncTask(methodAUpdater, executor);
+        //Utils.executeAsyncTask(methodAUpdater, executor);
 
 
     }
 
-    public void processFinish(List<String> output){
+    public void processFinish(String type, List<String> output){
         //Here you will receive the result fired from async class
         //of onPostExecute(result) method.
 
         Log.d(TAG, "After processFinish, received arraylist " + output);
-        catStringSet.addAll(output);
-        Log.d(TAG, "catStringSet is now: " + catStringSet);
+
+        if (type.equals("filter")) {
+            catStringSet.addAll(output);
+            Log.d(TAG, "catStringSet is now: " + catStringSet);
+        }
 
         /*
         categoriesAdapter.setItems(itemList);
@@ -366,6 +355,7 @@ public class CategorizationFragment extends SherlockFragment implements AsyncRes
         categoriesAdapter.notifyDataSetInvalidated();
         categoriesSearchInProgress.setVisibility(View.GONE);
         */
+
     }
 
     @Override

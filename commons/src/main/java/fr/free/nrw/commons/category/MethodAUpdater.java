@@ -40,7 +40,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected void onPostExecute(ArrayList<String> categories) {
         super.onPostExecute(categories);
         catFragment.setCatsAfterAsync(categories, filter);
-        delegate.processFinish(categories);
+        delegate.processFinish("test", categories);
     }
 
     @Override
