@@ -10,10 +10,11 @@ import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.nrw.commons.CommonsApplication;
 
-public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
+public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
 
     public AsyncResponse delegate = null;
 
@@ -36,7 +37,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> categories) {
+    protected void onPostExecute(List<String> categories) {
         super.onPostExecute(categories);
         catFragment.setCatsAfterAsync(categories, filter);
         //TODO: Return its own List

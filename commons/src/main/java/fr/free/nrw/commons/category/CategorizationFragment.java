@@ -47,6 +47,7 @@ public class CategorizationFragment extends SherlockFragment implements AsyncRes
 
     protected HashMap<String, ArrayList<String>> categoriesCache;
     LinkedHashSet<CategoryItem> itemSet = new LinkedHashSet<CategoryItem>();
+    LinkedHashSet<String> catStringSet = new LinkedHashSet<String>();
 
     private ContentProviderClient client;
 
@@ -122,7 +123,7 @@ public class CategorizationFragment extends SherlockFragment implements AsyncRes
     }
 
 
-    protected void setCatsAfterAsync(ArrayList<String> categories, String filter) {
+    protected void setCatsAfterAsync(List<String> categories, String filter) {
 
         ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
         HashSet<String> existingKeys = new HashSet<String>();
@@ -140,8 +141,8 @@ public class CategorizationFragment extends SherlockFragment implements AsyncRes
 
         //TODO: This will set items twice in Adapter. Need to be able to 'add' items to adapter instead? Need to convert LinkedHashSet to ArrayList first?
         //TODO: Maybe DON'T call this Adapter method. Instead make an add(items) method that will build up the LinkedHashSet. Then move this whole thing to bottom
-        itemSet.addAll(items);
-        Log.d(TAG, "Item Set" + itemSet.toString());
+        //itemSet.addAll(items);
+        //Log.d(TAG, "Item Set" + itemSet.toString());
 
 
         if (categories.size() == 0) {
@@ -350,11 +351,13 @@ public class CategorizationFragment extends SherlockFragment implements AsyncRes
 
     }
 
-    public void processFinish(ArrayList<String> output){
+    public void processFinish(List<String> output){
         //Here you will receive the result fired from async class
         //of onPostExecute(result) method.
 
         Log.d(TAG, "After processFinish, received arraylist " + output);
+        catStringSet.addAll(output);
+        Log.d(TAG, "catStringSet is now: " + catStringSet);
 
         /*
         categoriesAdapter.setItems(itemList);
