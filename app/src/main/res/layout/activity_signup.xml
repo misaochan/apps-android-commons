@@ -2,8 +2,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/window_background_color">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -68,10 +67,10 @@
 
             <Button
                 android:id="@+id/create_account_submit_button"
-                android:text="@string/create_account_next"
-                style="@style/ButtonProgressive"
+                android:text="Create Account Next"
                 android:enabled="false"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/create_account_login_link"
@@ -79,9 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:padding="8dp"
-                android:text="@string/create_account_login_link"
+                android:text="Create account Login Link"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/link_color"
                 />
 
             <TextView
@@ -90,15 +88,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:padding="8dp"
-                android:text="@string/privacy_policy_description"
+                android:text="Privacy Policy Description"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?attr/link_color"
                 android:clickable="true"
                 android:onClick="showPrivacyPolicy"
                 />
 
         </LinearLayout>
 
-        <include layout="@layout/group_captcha" />
     </FrameLayout>
 </ScrollView>
