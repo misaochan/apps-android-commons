@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.view.MenuItem;
 import android.view.KeyEvent;
 import android.view.View;
@@ -73,7 +74,17 @@ public class SignupActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
+        setContentView(R.layout.activity_signup);
+
+        final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
+        final TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
+        final TextInputLayout repeatPasswordWrapper = (TextInputLayout) findViewById(R.id.repeatPasswordWrapper);
+        final TextInputLayout emailWrapper = (TextInputLayout) findViewById(R.id.emailWrapper);
+
+        usernameWrapper.setHint("Username");
+        passwordWrapper.setHint("Password");
+        repeatPasswordWrapper.setHint("Repeat password");
+        emailWrapper.setHint("Email address");
 
         usernameEdit = (EditText) findViewById(R.id.create_account_username);
         passwordRepeatEdit = (EditText) findViewById(R.id.create_account_password_repeat);
