@@ -73,22 +73,12 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/create_account_login_link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_horizontal"
-                android:padding="8dp"
-                android:text="Create account Login Link"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                />
-
-            <TextView
                 android:id="@+id/privacy_policy_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:padding="8dp"
-                android:text="Privacy Policy Description"
+                android:text="Privacy policy"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:clickable="true"
                 android:onClick="showPrivacyPolicy"
