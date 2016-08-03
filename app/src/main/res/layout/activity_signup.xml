@@ -18,8 +18,8 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/create_account_username_hint">
-                <org.wikipedia.views.PlainPasteEditText
+                android:hint="Username">
+                <fr.free.nrw.commons.auth.PlainPasteEditText
                     android:id="@+id/create_account_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -29,18 +29,19 @@
                     />
             </android.support.design.widget.TextInputLayout>
 
-            <org.wikipedia.views.PasswordTextInput
+            <fr.free.nrw.commons.auth.PasswordTextInput
                 android:id="@+id/create_account_password_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/create_account_password_repeat_hint">
-                <org.wikipedia.views.PlainPasteEditText
+                android:hint="create_account_password_repeat_hint">
+                <fr.free.nrw.commons.PlainPasteEditText
                     android:id="@+id/create_account_password_repeat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,8 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/create_account_email_hint">
-                <org.wikipedia.views.PlainPasteEditText
+                android:hint="create_account_email_hint">
+                <fr.free.nrw.commons.PlainPasteEditText
                     android:id="@+id/create_account_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,7 +68,7 @@
 
             <Button
                 android:id="@+id/create_account_submit_button"
-                android:text="Create Account Next"
+                android:text="Next"
                 android:enabled="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
