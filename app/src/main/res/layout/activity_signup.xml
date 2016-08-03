@@ -4,17 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="#e3e3e3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:padding="@dimen/activity_horizontal_margin"
+        tools:context=".auth.SignupActivity"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:id="@+id/create_account_primary_container"
             android:layout_width="match_parent"
+            android:id="@+id/create_account_primary_container"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            >
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +76,7 @@
                 android:id="@+id/create_account_submit_button"
                 android:text="Next"
                 android:enabled="false"
-             />
+                android:layout_width="0dp" />
 
             <TextView
                 android:id="@+id/privacy_policy_link"
@@ -85,7 +91,5 @@
                 />
 
         </LinearLayout>
-
-        <include layout="@layout/group_captcha" />
     </FrameLayout>
 </ScrollView>
