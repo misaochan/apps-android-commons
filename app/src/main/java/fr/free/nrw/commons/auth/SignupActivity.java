@@ -86,15 +86,18 @@ public class SignupActivity extends Activity {
         repeatPasswordWrapper.setHint("Repeat password");
         emailWrapper.setHint("Email address");
 
-        usernameEdit = (EditText) findViewById(R.id.create_account_username);
-        passwordRepeatEdit = (EditText) findViewById(R.id.create_account_password_repeat);
-        emailEdit = (EditText) findViewById(R.id.create_account_email);
         createAccountButton = (Button) findViewById(R.id.create_account_submit_button);
         createAccountButtonCaptcha = (Button) findViewById(R.id.captcha_submit_button);
         EditText captchaText = (EditText) findViewById(R.id.captcha_text);
+
         View primaryContainer = findViewById(R.id.create_account_primary_container);
-        PasswordTextInput passwordInput = (PasswordTextInput) findViewById(R.id.create_account_password_input);
-        passwordEdit = passwordInput.getEditText();
+
+        //TODO: All of these can be done with getEditText()
+        usernameEdit = (EditText) findViewById(R.id.create_account_username);
+        passwordRepeatEdit = (EditText) findViewById(R.id.create_account_password_repeat);
+        emailEdit = (EditText) findViewById(R.id.create_account_email);
+        // PasswordTextInput passwordInput = (PasswordTextInput) findViewById(R.id.create_account_password_input);
+       // passwordEdit = passwordInput.getEditText();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
