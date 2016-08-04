@@ -214,7 +214,7 @@ public class SignupActivity extends Activity {
         outState.putParcelable("result", createAccountResult);
     }
 
-    /*
+   
     public void showPrivacyPolicy(View v) {
         FeedbackUtil.showPrivacyPolicy(this);
     }
@@ -224,7 +224,7 @@ public class SignupActivity extends Activity {
         FeedbackUtil.showMessage(this, message);
         L.w("Account creation failed with result " + message);
     }
-    */
+
 
     public void getCreateAccountInfo() {
         new CreateAccountInfoTask() {
@@ -275,7 +275,7 @@ public class SignupActivity extends Activity {
                     return;
                 }
                 progressDialog.dismiss();
-                FeedbackUtil.showError(CreateAccountActivity.this, caught);
+                FeedbackUtil.showError(this, caught);
             }
 
             @Override
@@ -289,7 +289,7 @@ public class SignupActivity extends Activity {
                     progressDialog.dismiss();
                     captchaHandler.cancelCaptcha();
                     funnel.logSuccess();
-                    hideSoftKeyboard(CreateAccountActivity.this);
+                    hideSoftKeyboard(this);
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("username", ((CreateAccountSuccessResult) result).getUsername());
                     resultIntent.putExtra("password", passwordEdit.getText().toString());
