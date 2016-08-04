@@ -96,15 +96,15 @@ public class SignupActivity extends Activity {
         usernameEdit = (EditText) findViewById(R.id.create_account_username);
         passwordRepeatEdit = (EditText) findViewById(R.id.create_account_password_repeat);
         emailEdit = (EditText) findViewById(R.id.create_account_email);
-        // PasswordTextInput passwordInput = (PasswordTextInput) findViewById(R.id.create_account_password_input);
-       // passwordEdit = passwordInput.getEditText();
+        PasswordTextInput passwordInput = (PasswordTextInput) findViewById(R.id.create_account_password_input);
+        passwordEdit = passwordInput.getEditText();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
         progressDialog.setMessage(getString(R.string.dialog_create_account_checking_progress));
 
-        //captchaHandler = new CaptchaHandler(this, WikipediaApp.getInstance().getSite(), progressDialog, primaryContainer, getString(R.string.create_account_activity_title), getString(R.string.create_account_button));
+        captchaHandler = new CaptchaHandler(this, WikipediaApp.getInstance().getSite(), progressDialog, primaryContainer, getString(R.string.create_account_activity_title), getString(R.string.create_account_button));
 
         // We enable the menu item as soon as the username and password fields are filled
         // Tapping does further validation
