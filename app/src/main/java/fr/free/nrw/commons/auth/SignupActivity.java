@@ -51,11 +51,11 @@ public class SignupActivity extends Activity {
     private EditText usernameEdit;
     @Password()
     private EditText passwordEdit;
-    @ConfirmPassword(messageResId = R.string.create_account_passwords_mismatch_error)
+    @ConfirmPassword
     private EditText passwordRepeatEdit;
     // TODO: remove and replace with @Optional annotation once it's available in the library
     // https://github.com/ragunathjawahar/android-saripaar/issues/102
-    @OptionalEmail(messageResId = R.string.create_account_email_error)
+    //@Optional
     private EditText emailEdit;
 
     private Button createAccountButton;
