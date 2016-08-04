@@ -104,9 +104,7 @@ public class SignupActivity extends Activity {
         progressDialog.setCancelable(false);
         progressDialog.setMessage(getString(R.string.dialog_create_account_checking_progress));
 
-        captchaHandler = new CaptchaHandler(this, WikipediaApp.getInstance().getSite(),
-                progressDialog, primaryContainer, getString(R.string.create_account_activity_title),
-                getString(R.string.create_account_button));
+        //captchaHandler = new CaptchaHandler(this, WikipediaApp.getInstance().getSite(), progressDialog, primaryContainer, getString(R.string.create_account_activity_title), getString(R.string.create_account_button));
 
         // We enable the menu item as soon as the username and password fields are filled
         // Tapping does further validation
