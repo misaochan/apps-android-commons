@@ -67,7 +67,7 @@ public class SignupActivity extends Activity {
 
     private CreateAccountResult createAccountResult;
 
-    private AutoCompleteTextView.Validator validator;
+    private Validator validator;
 
     private CreateAccountFunnel funnel;
 
@@ -108,7 +108,7 @@ public class SignupActivity extends Activity {
         // We enable the menu item as soon as the username and password fields are filled
         // Tapping does further validation
         validator = new Validator(this);
-        Validator.registerAnnotation(OptionalEmail.class);
+        //Validator.registerAnnotation(OptionalEmail.class);
         validator.setValidationListener(new Validator.ValidationListener() {
             @Override
             public void onValidationSucceeded() {
