@@ -201,10 +201,12 @@ public class SignupActivity extends Activity {
         setResult(RESULT_ACCOUNT_NOT_CREATED);
     }
 
+    /*
     @Override
     protected void setTheme() {
         setActionBarTheme();
     }
+    */
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -212,14 +214,17 @@ public class SignupActivity extends Activity {
         outState.putParcelable("result", createAccountResult);
     }
 
+    /*
     public void showPrivacyPolicy(View v) {
         FeedbackUtil.showPrivacyPolicy(this);
     }
+
 
     public void handleError(@NonNull String message) {
         FeedbackUtil.showMessage(this, message);
         L.w("Account creation failed with result " + message);
     }
+    */
 
     public void getCreateAccountInfo() {
         new CreateAccountInfoTask() {
