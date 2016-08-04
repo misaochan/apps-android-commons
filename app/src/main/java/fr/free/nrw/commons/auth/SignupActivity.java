@@ -214,7 +214,7 @@ public class SignupActivity extends Activity {
         outState.putParcelable("result", createAccountResult);
     }
 
-   
+
     public void showPrivacyPolicy(View v) {
         FeedbackUtil.showPrivacyPolicy(this);
     }
