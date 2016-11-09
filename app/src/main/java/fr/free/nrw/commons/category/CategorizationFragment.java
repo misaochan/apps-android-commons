@@ -427,6 +427,8 @@ public class CategorizationFragment extends Fragment {
         }
 
         categoriesAdapter = new CategoriesAdapter(getActivity(), items);
+
+        //TODO: Set adapter to MergeAdapter instead. Must pour contents in first.
         categoriesList.setAdapter(categoriesAdapter);
 
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
