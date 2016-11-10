@@ -81,7 +81,7 @@ public class CategorizationFragment extends Fragment {
     private final ArrayList<String> titleCatItems = new ArrayList<String>();
     final CountDownLatch mergeLatch = new CountDownLatch(1);
 
-    private MergeAdapter adapter;
+    private MergeAdapter mergeAdapter;
 
     private ContentProviderClient client;
 
@@ -421,8 +421,8 @@ public class CategorizationFragment extends Fragment {
             }
         });
 
-        adapter=new MergeAdapter();
-        
+        mergeAdapter=new MergeAdapter();
+
         ArrayList<CategoryItem> items;
         if(savedInstanceState == null) {
             items = new ArrayList<CategoryItem>();
