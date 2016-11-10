@@ -86,7 +86,7 @@ public class CategorizationFragment extends Fragment {
 
     private ContentProviderClient client;
 
-    protected final static int SEARCH_CATS_LIMIT = 25;
+    protected final static int SEARCH_CATS_LIMIT = 10;
     private static final String TAG = CategorizationFragment.class.getName();
 
     public static class CategoryItem implements Parcelable {
@@ -134,16 +134,16 @@ public class CategorizationFragment extends Fragment {
         //Retrieve the title that was saved when user tapped submit icon
         SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String title = titleDesc.getString("Title", "");
-        Log.d(TAG, "Title: " + title);
+        //Log.d(TAG, "Title: " + title);
 
         //Override onPostExecute to access the results of async API call
         titleCategoriesSub = new TitleCategories(title) {
             @Override
             protected void onPostExecute(ArrayList<String> result) {
                 super.onPostExecute(result);
-                Log.d(TAG, "Results in onPostExecute: " + result);
+                //Log.d(TAG, "Results in onPostExecute: " + result);
                 titleCatItems.addAll(result);
-                Log.d(TAG, "TitleCatItems in onPostExecute: " + titleCatItems);
+                //Log.d(TAG, "TitleCatItems in onPostExecute: " + titleCatItems);
                 mergeLatch.countDown();
             }
         };
@@ -370,8 +370,8 @@ public class CategorizationFragment extends Fragment {
                 categoriesCache.put(filter, resultsList);
                 Log.d(TAG, "Final results List: " + resultsList);
 
-                categoriesAdapter.notifyDataSetChanged();
                 categoriesList.setAdapter(categoriesAdapter);
+                categoriesAdapter.notifyDataSetChanged();
 
                 setCatsAfterAsync(resultsList, filter);
             }
