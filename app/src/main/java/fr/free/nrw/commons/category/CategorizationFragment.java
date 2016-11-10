@@ -211,8 +211,15 @@ public class CategorizationFragment extends Fragment {
             Log.e(TAG, "Interrupted Exception: ", e);
         }
 
+        //TODO: This works but how do you split the list up before setAdapter?
+        mergeAdapter.addView(buildLabel());
+
+
+
+
         mergedItems.addAll(gpsItems);
         Log.d(TAG, "Adding GPS items: " + gpsItems);
+
         mergedItems.addAll(titleItems);
         Log.d(TAG, "Adding title items: " + titleItems);
         mergedItems.addAll(recentItems);
@@ -306,8 +313,10 @@ public class CategorizationFragment extends Fragment {
                 categoriesCache.put(filter, resultsList);
                 Log.d(TAG, "Final results List: " + resultsList);
 
+                //TODO: New
                 if(TextUtils.isEmpty(filter)) {
                     categoriesList.setAdapter(mergeAdapter);
+                    Log.d(TAG, "No search test, setting adapter to MergeAdapter");
                 }
 
                 categoriesAdapter.notifyDataSetChanged();
@@ -323,7 +332,7 @@ public class CategorizationFragment extends Fragment {
 
                 results.addAll(result);
                 Log.d(TAG, "Method A result: " + result);
-                
+
                 categoriesAdapter.notifyDataSetChanged();
 
                 latch.countDown();
@@ -441,10 +450,6 @@ public class CategorizationFragment extends Fragment {
         categoriesAdapter = new CategoriesAdapter(getActivity(), items);
 
         mergeAdapter.addAdapter(categoriesAdapter);
-        //TODO: This works but how do you split the list up before setAdapter?
-        mergeAdapter.addView(buildLabel());
-
-
 
         //TODO: Set adapter to MergeAdapter instead. Must pour contents in first.
         categoriesList.setAdapter(categoriesAdapter);
@@ -482,7 +487,7 @@ public class CategorizationFragment extends Fragment {
     //FIXME: For debugging
     private View buildLabel() {
         TextView result=new TextView(getActivity());
-        result.setText("Hello, world!");
+        result.setText("GPS items");
         return(result);
     }
 
