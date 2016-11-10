@@ -32,6 +32,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.commonsware.cwac.merge.MergeAdapter;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -78,6 +80,8 @@ public class CategorizationFragment extends Fragment {
 
     private final ArrayList<String> titleCatItems = new ArrayList<String>();
     final CountDownLatch mergeLatch = new CountDownLatch(1);
+
+    private MergeAdapter adapter;
 
     private ContentProviderClient client;
 
@@ -417,6 +421,8 @@ public class CategorizationFragment extends Fragment {
             }
         });
 
+        adapter=new MergeAdapter();
+        
         ArrayList<CategoryItem> items;
         if(savedInstanceState == null) {
             items = new ArrayList<CategoryItem>();

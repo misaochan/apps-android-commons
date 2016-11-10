@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    maven {
+        url "https://s3.amazonaws.com/repo.commonsware.com"
+    }
+}
+
 dependencies {
     compile ('com.github.nicolas-raoul:Quadtree:211b6fe59ac48f') {
         exclude module: 'junit'
@@ -14,6 +20,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:design:25.0.0'
+    compile 'com.commonsware.cwac:merge:1.1.+'
 
     testCompile 'junit:junit:4.12'
 
