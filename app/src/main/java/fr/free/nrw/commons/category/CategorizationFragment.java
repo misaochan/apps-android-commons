@@ -86,7 +86,7 @@ public class CategorizationFragment extends Fragment {
 
     private ContentProviderClient client;
 
-    protected final static int SEARCH_CATS_LIMIT = 10;
+    protected final static int SEARCH_CATS_LIMIT = 25;
     private static final String TAG = CategorizationFragment.class.getName();
 
     public static class CategoryItem implements Parcelable {
@@ -373,8 +373,7 @@ public class CategorizationFragment extends Fragment {
                 Log.d(TAG, "Final results List: " + resultsList);
 
                 setCatsAfterAsync(resultsList, filter);
-
-                //TODO: this is returning 0, why?
+                
                 Log.d(TAG, "Number of items in categoriesAdapter: " + categoriesAdapter.getCount());
 
 
