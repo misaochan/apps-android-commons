@@ -79,6 +79,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
+        /*
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
             //TODO: We only want headers for this case. Maybe set Adapter to mergeAdapter in this case, otherwise set to the usual adapter
@@ -88,7 +89,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
 
             return filteredItems;
-        }
+        }*/
 
         //if user types in something that is in cache, return cached category
         if(catFragment.categoriesCache.containsKey(filter)) {
