@@ -421,6 +421,7 @@ public class CategorizationFragment extends Fragment {
             }
         });
 
+        //Create mergeAdapter to merge header views with categories adapter
         mergeAdapter=new MergeAdapter();
 
         ArrayList<CategoryItem> items;
