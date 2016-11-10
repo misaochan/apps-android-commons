@@ -439,7 +439,7 @@ public class CategorizationFragment extends Fragment {
         mergeAdapter.addView(buildLabel());
 
         //TODO: Set adapter to MergeAdapter instead. Must pour contents in first.
-        categoriesList.setAdapter(categoriesAdapter);
+        categoriesList.setAdapter(mergeAdapter);
 
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
