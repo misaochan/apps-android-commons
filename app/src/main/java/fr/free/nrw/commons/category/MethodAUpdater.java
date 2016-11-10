@@ -85,6 +85,8 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             ArrayList<String> mergedItems = new ArrayList<String>(catFragment.mergeItems());
             Log.d(TAG, "Merged items, waiting for filter");
             ArrayList<String> filteredItems = new ArrayList<String>(filterYears(mergedItems));
+
+
             return filteredItems;
         }
 

@@ -306,6 +306,10 @@ public class CategorizationFragment extends Fragment {
                 categoriesCache.put(filter, resultsList);
                 Log.d(TAG, "Final results List: " + resultsList);
 
+                if(TextUtils.isEmpty(filter)) {
+                    categoriesList.setAdapter(mergeAdapter);
+                }
+
                 categoriesAdapter.notifyDataSetChanged();
                 setCatsAfterAsync(resultsList, filter);
             }
@@ -319,6 +323,7 @@ public class CategorizationFragment extends Fragment {
 
                 results.addAll(result);
                 Log.d(TAG, "Method A result: " + result);
+                
                 categoriesAdapter.notifyDataSetChanged();
 
                 latch.countDown();
@@ -439,8 +444,10 @@ public class CategorizationFragment extends Fragment {
         //TODO: This works but how do you split the list up before setAdapter?
         mergeAdapter.addView(buildLabel());
 
+
+
         //TODO: Set adapter to MergeAdapter instead. Must pour contents in first.
-        categoriesList.setAdapter(mergeAdapter);
+        categoriesList.setAdapter(categoriesAdapter);
 
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
