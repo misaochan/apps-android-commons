@@ -356,13 +356,13 @@ public class CategorizationFragment extends Fragment {
                     mergeAdapter.addView(buildLabel());
                     mergeAdapter.addAdapter(recentAdapter);
 
+                    mergeAdapter.notifyDataSetChanged();
                     categoriesList.setAdapter(mergeAdapter);
                     Log.d(TAG, "No search test, setting adapter to MergeAdapter");
+                    return;
                 }
 
                 categoriesAdapter.notifyDataSetChanged();
-
-
 
                 setCatsAfterAsync(resultsList, filter);
             }
