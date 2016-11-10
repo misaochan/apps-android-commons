@@ -333,6 +333,19 @@ public class CategorizationFragment extends Fragment {
                     mergeAdapter.addView(buildLabel());
                     mergeAdapter.addAdapter(gpsAdapter);
 
+                    ArrayList<String> titleItems = new ArrayList<String>(titleCatQuery());
+                    ArrayList<String> recentItems = new ArrayList<String>(recentCatQuery());
+
+                    //Await results of titleItems, which is likely to come in last
+                    try {
+                        mergeLatch.await(5L, TimeUnit.SECONDS);
+                        Log.d(TAG, "Waited for merge");
+                    } catch (InterruptedException e) {
+                        Log.e(TAG, "Interrupted Exception: ", e);
+                    }
+
+
+
                     categoriesList.setAdapter(mergeAdapter);
                     Log.d(TAG, "No search test, setting adapter to MergeAdapter");
                 }
