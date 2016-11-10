@@ -436,6 +436,7 @@ public class CategorizationFragment extends Fragment {
         categoriesAdapter = new CategoriesAdapter(getActivity(), items);
 
         mergeAdapter.addAdapter(categoriesAdapter);
+        mergeAdapter.addView(buildLabel());
 
         //TODO: Set adapter to MergeAdapter instead. Must pour contents in first.
         categoriesList.setAdapter(categoriesAdapter);
@@ -468,6 +469,13 @@ public class CategorizationFragment extends Fragment {
         startUpdatingCategoryList();
 
         return rootView;
+    }
+
+    //FIXME: For debugging
+    private View buildLabel() {
+        TextView result=new TextView(getActivity());
+        result.setText("Hello, world!");
+        return(result);
     }
 
     @Override
