@@ -317,6 +317,7 @@ public class CategorizationFragment extends Fragment {
                 super.onPostExecute(result);
 
                 //TODO: New
+                //If no text in search box, return GPS, Title, and Recent cats
                 if(TextUtils.isEmpty(filter)) {
 
                     ArrayList<String> gpsItems = new ArrayList<String>();
