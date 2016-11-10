@@ -436,6 +436,7 @@ public class CategorizationFragment extends Fragment {
         categoriesAdapter = new CategoriesAdapter(getActivity(), items);
 
         mergeAdapter.addAdapter(categoriesAdapter);
+        //TODO: This works but how do you split the list up before setAdapter?
         mergeAdapter.addView(buildLabel());
 
         //TODO: Set adapter to MergeAdapter instead. Must pour contents in first.
