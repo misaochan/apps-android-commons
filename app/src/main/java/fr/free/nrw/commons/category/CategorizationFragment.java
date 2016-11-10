@@ -190,7 +190,7 @@ public class CategorizationFragment extends Fragment {
     /**
      * Merges nearby categories, categories suggested based on title, and recent categories... without duplicates.
      * @return a list containing merged categories
-     */
+
     protected ArrayList<String> mergeItems() {
 
         Set<String> mergedItems = new LinkedHashSet<String>();
@@ -229,6 +229,7 @@ public class CategorizationFragment extends Fragment {
         Log.d(TAG, "Merged item list: " + mergedItemsList);
         return mergedItemsList;
     }
+    */
 
     private ArrayList<CategoryItem> stringsToCategoryItems(ArrayList<String> categories) {
         ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
@@ -293,6 +294,9 @@ public class CategorizationFragment extends Fragment {
         final CountDownLatch latch = new CountDownLatch(1);
 
         prefixUpdaterSub = new PrefixUpdater(this) {
+
+            ArrayList<String> titleItems;
+
             @Override
             protected ArrayList<String> doInBackground(Void... voids) {
                 ArrayList<String> result = new ArrayList<String>();
@@ -304,14 +308,13 @@ public class CategorizationFragment extends Fragment {
                     Log.w(TAG, e);
                     //Thread.currentThread().interrupt();
                 }
+                titleItems = new ArrayList<String>(titleCatQuery());
                 return result;
             }
 
             @Override
             protected void onPostExecute(ArrayList<String> result) {
                 super.onPostExecute(result);
-
-
 
                 //TODO: New
                 if(TextUtils.isEmpty(filter)) {
@@ -327,7 +330,7 @@ public class CategorizationFragment extends Fragment {
                     mergeAdapter.addView(buildGpsLabel());
                     mergeAdapter.addAdapter(gpsAdapter);
 
-                    ArrayList<String> titleItems = new ArrayList<String>(titleCatQuery());
+
                     ArrayList<String> recentItems = new ArrayList<String>(recentCatQuery());
 
                     //Await results of titleItems, which is likely to come in last
