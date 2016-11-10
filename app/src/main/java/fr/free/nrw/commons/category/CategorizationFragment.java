@@ -324,7 +324,7 @@ public class CategorizationFragment extends Fragment {
                     ArrayList<CategoryItem> gpsCats = new ArrayList<>(stringsToCategoryItems(gpsItems));
                     CategoriesAdapter gpsAdapter = new CategoriesAdapter(getActivity(), gpsCats);
 
-                    mergeAdapter.addView(buildLabel());
+                    mergeAdapter.addView(buildGpsLabel());
                     mergeAdapter.addAdapter(gpsAdapter);
 
                     ArrayList<String> titleItems = new ArrayList<String>(titleCatQuery());
@@ -341,13 +341,13 @@ public class CategorizationFragment extends Fragment {
                     ArrayList<CategoryItem> titleCats = new ArrayList<>(stringsToCategoryItems(titleItems));
                     CategoriesAdapter titleAdapter = new CategoriesAdapter(getActivity(), titleCats);
 
-                    mergeAdapter.addView(buildLabel());
+                    mergeAdapter.addView(buildTitleLabel());
                     mergeAdapter.addAdapter(titleAdapter);
 
                     ArrayList<CategoryItem> recentCats = new ArrayList<>(stringsToCategoryItems(recentItems));
                     CategoriesAdapter recentAdapter = new CategoriesAdapter(getActivity(), recentCats);
 
-                    mergeAdapter.addView(buildLabel());
+                    mergeAdapter.addView(buildRecentLabel());
                     mergeAdapter.addAdapter(recentAdapter);
 
                     mergeAdapter.notifyDataSetChanged();
@@ -531,9 +531,21 @@ public class CategorizationFragment extends Fragment {
     }
 
     //FIXME: For debugging
-    private View buildLabel() {
+    private View buildGpsLabel() {
         TextView result=new TextView(getActivity());
         result.setText("GPS items");
+        return(result);
+    }
+
+    private View buildRecentLabel() {
+        TextView result=new TextView(getActivity());
+        result.setText("Recent items");
+        return(result);
+    }
+
+    private View buildTitleLabel() {
+        TextView result=new TextView(getActivity());
+        result.setText("Title items");
         return(result);
     }
 
