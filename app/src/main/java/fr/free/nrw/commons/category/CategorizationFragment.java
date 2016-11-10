@@ -356,6 +356,8 @@ public class CategorizationFragment extends Fragment {
                     mergeAdapter.notifyDataSetChanged();
                     categoriesList.setAdapter(mergeAdapter);
                     Log.d(TAG, "No search test, setting adapter to MergeAdapter");
+
+                    categoriesSearchInProgress.setVisibility(View.GONE);
                     return;
                 }
 
@@ -368,6 +370,7 @@ public class CategorizationFragment extends Fragment {
                 Log.d(TAG, "Final results List: " + resultsList);
 
                 categoriesAdapter.notifyDataSetChanged();
+                categoriesList.setAdapter(categoriesAdapter);
 
                 setCatsAfterAsync(resultsList, filter);
             }

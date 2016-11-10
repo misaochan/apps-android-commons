@@ -83,6 +83,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
+            //Return empty list for subclass method to deal with
             ArrayList<String> mergedItems = new ArrayList<String>();
             return mergedItems;
         }
