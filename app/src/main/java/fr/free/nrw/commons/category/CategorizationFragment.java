@@ -211,8 +211,9 @@ public class CategorizationFragment extends Fragment {
             Log.e(TAG, "Interrupted Exception: ", e);
         }
 
-        //TODO: This works but how do you split the list up before setAdapter?
+        //This will be called before categoriesList is set to mergeAdapter in onPostExecute()
         mergeAdapter.addView(buildLabel());
+        mergeAdapter.addAdapter(categoriesAdapter);
 
 
 
@@ -449,7 +450,7 @@ public class CategorizationFragment extends Fragment {
         mergeAdapter=new MergeAdapter();
         categoriesAdapter = new CategoriesAdapter(getActivity(), items);
 
-        mergeAdapter.addAdapter(categoriesAdapter);
+
 
         //TODO: Set adapter to MergeAdapter instead. Must pour contents in first.
         categoriesList.setAdapter(categoriesAdapter);
