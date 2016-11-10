@@ -314,6 +314,7 @@ public class CategorizationFragment extends Fragment {
 
             @Override
             protected void onPostExecute(ArrayList<String> result) {
+                filter = categoriesFilter.getText().toString();
                 super.onPostExecute(result);
 
                 //TODO: New
@@ -364,8 +365,7 @@ public class CategorizationFragment extends Fragment {
 
                 results.addAll(result);
                 Log.d(TAG, "Prefix result: " + result);
-
-                filter = categoriesFilter.getText().toString();
+                
                 ArrayList<String> resultsList = new ArrayList<String>(results);
                 categoriesCache.put(filter, resultsList);
                 Log.d(TAG, "Final results List: " + resultsList);
