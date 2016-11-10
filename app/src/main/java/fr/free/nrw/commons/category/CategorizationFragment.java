@@ -214,6 +214,7 @@ public class CategorizationFragment extends Fragment {
         }
 
 
+        //FIXME: Remove this later
         mergedItems.addAll(gpsItems);
         Log.d(TAG, "Adding GPS items: " + gpsItems);
 
@@ -320,22 +321,7 @@ public class CategorizationFragment extends Fragment {
 
                 //TODO: New
                 if(TextUtils.isEmpty(filter)) {
-
-                    ArrayList<String> gpsItems = new ArrayList<String>();
-                    if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
-                        gpsItems.addAll(MwVolleyApi.getGpsCat());
-                    }
-
-                        mergeAdapter.addView(buildLabel());
-
-                    ArrayList<CategoryItem> gpsCats = setCatsAfterAsync(gpsItems, filter);
-                        CategoriesAdapter gpsAdapter = new CategoriesAdapter(getActivity(), gpsItems);
-                    mergeAdapter.addAdapter(gpsAdapter);
-
-
-
-
-
+                    
                     categoriesList.setAdapter(mergeAdapter);
                     Log.d(TAG, "No search test, setting adapter to MergeAdapter");
                 }
