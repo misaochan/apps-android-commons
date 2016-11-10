@@ -421,9 +421,6 @@ public class CategorizationFragment extends Fragment {
             }
         });
 
-        //Create mergeAdapter to merge header views with categories adapter
-        mergeAdapter=new MergeAdapter();
-
         ArrayList<CategoryItem> items;
         if(savedInstanceState == null) {
             items = new ArrayList<CategoryItem>();
@@ -433,6 +430,9 @@ public class CategorizationFragment extends Fragment {
             categoriesCache = (HashMap<String, ArrayList<String>>) savedInstanceState.getSerializable("categoriesCache");
         }
 
+
+        //Create mergeAdapter to merge header views with categories adapter
+        mergeAdapter=new MergeAdapter();
         categoriesAdapter = new CategoriesAdapter(getActivity(), items);
 
         mergeAdapter.addAdapter(categoriesAdapter);
