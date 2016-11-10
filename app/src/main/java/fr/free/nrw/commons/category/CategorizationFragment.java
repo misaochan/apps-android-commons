@@ -321,7 +321,18 @@ public class CategorizationFragment extends Fragment {
 
                 //TODO: New
                 if(TextUtils.isEmpty(filter)) {
-                    
+
+                    ArrayList<String> gpsItems = new ArrayList<String>();
+                    if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
+                        gpsItems.addAll(MwVolleyApi.getGpsCat());
+                    }
+
+                    ArrayList<CategoryItem> gpsCats = new ArrayList<>(stringsToCategoryItems(gpsItems));
+                    CategoriesAdapter gpsAdapter = new CategoriesAdapter(getActivity(), gpsCats);
+
+                    mergeAdapter.addView(buildLabel());
+                    mergeAdapter.addAdapter(gpsAdapter);
+
                     categoriesList.setAdapter(mergeAdapter);
                     Log.d(TAG, "No search test, setting adapter to MergeAdapter");
                 }
