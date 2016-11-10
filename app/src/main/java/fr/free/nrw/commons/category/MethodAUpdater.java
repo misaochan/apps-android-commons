@@ -81,7 +81,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected ArrayList<String> doInBackground(Void... voids) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
-            //TODO: We only want headers for this case
+            //TODO: We only want headers for this case. Maybe set Adapter to mergeAdapter in this case, otherwise set to the usual adapter
             ArrayList<String> mergedItems = new ArrayList<String>(catFragment.mergeItems());
             Log.d(TAG, "Merged items, waiting for filter");
             ArrayList<String> filteredItems = new ArrayList<String>(filterYears(mergedItems));

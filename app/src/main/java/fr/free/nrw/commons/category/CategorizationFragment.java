@@ -81,7 +81,7 @@ public class CategorizationFragment extends Fragment {
     private final ArrayList<String> titleCatItems = new ArrayList<String>();
     final CountDownLatch mergeLatch = new CountDownLatch(1);
 
-    private MergeAdapter mergeAdapter;
+    protected MergeAdapter mergeAdapter;
 
     private ContentProviderClient client;
 
