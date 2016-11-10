@@ -82,6 +82,7 @@ public class CategorizationFragment extends Fragment {
     final CountDownLatch mergeLatch = new CountDownLatch(1);
 
     protected MergeAdapter mergeAdapter;
+    private String filter;
 
     private ContentProviderClient client;
 
@@ -194,6 +195,7 @@ public class CategorizationFragment extends Fragment {
 
         Set<String> mergedItems = new LinkedHashSet<String>();
 
+
         Log.d(TAG, "Calling APIs for GPS cats, title cats and recent cats...");
 
         List<String> gpsItems = new ArrayList<String>();
@@ -211,12 +213,6 @@ public class CategorizationFragment extends Fragment {
             Log.e(TAG, "Interrupted Exception: ", e);
         }
 
-        //This will be called before categoriesList is set to mergeAdapter in onPostExecute()
-        mergeAdapter.addView(buildLabel());
-        mergeAdapter.addAdapter(categoriesAdapter);
-
-
-
 
         mergedItems.addAll(gpsItems);
         Log.d(TAG, "Adding GPS items: " + gpsItems);
@@ -233,6 +229,24 @@ public class CategorizationFragment extends Fragment {
         return mergedItemsList;
     }
 
+    private ArrayList<CategoryItem> stringsToCategoryItems(ArrayList<String> categories) {
+        ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
+        HashSet<String> existingKeys = new HashSet<String>();
+        for (CategoryItem item : categoriesAdapter.getItems()) {
+            if (item.selected) {
+                items.add(item);
+                existingKeys.add(item.name);
+            }
+        }
+        for (String category : categories) {
+            if (!existingKeys.contains(category)) {
+                items.add(new CategoryItem(category, false));
+            }
+        }
+
+        return items;
+    }
+
     /**
      * Displays categories found to the user as they type in the search box
      * @param categories a list of all categories found for the search string
@@ -241,19 +255,9 @@ public class CategorizationFragment extends Fragment {
     protected void setCatsAfterAsync(ArrayList<String> categories, String filter) {
 
         if (getActivity() != null) {
+
             ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
-            HashSet<String> existingKeys = new HashSet<String>();
-            for (CategoryItem item : categoriesAdapter.getItems()) {
-                if (item.selected) {
-                    items.add(item);
-                    existingKeys.add(item.name);
-                }
-            }
-            for (String category : categories) {
-                if (!existingKeys.contains(category)) {
-                    items.add(new CategoryItem(category, false));
-                }
-            }
+            stringsToCategoryItems(categories);
 
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
@@ -268,7 +272,7 @@ public class CategorizationFragment extends Fragment {
                     categoriesNotFoundView.setVisibility(View.VISIBLE);
                 }
             } else {
-                categoriesList.smoothScrollToPosition(existingKeys.size());
+                categoriesList.smoothScrollToPosition(items.size());
             }
         }
         else {
@@ -309,18 +313,37 @@ public class CategorizationFragment extends Fragment {
                 results.addAll(result);
                 Log.d(TAG, "Prefix result: " + result);
 
-                String filter = categoriesFilter.getText().toString();
+                filter = categoriesFilter.getText().toString();
                 ArrayList<String> resultsList = new ArrayList<String>(results);
                 categoriesCache.put(filter, resultsList);
                 Log.d(TAG, "Final results List: " + resultsList);
 
                 //TODO: New
                 if(TextUtils.isEmpty(filter)) {
+
+                    ArrayList<String> gpsItems = new ArrayList<String>();
+                    if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
+                        gpsItems.addAll(MwVolleyApi.getGpsCat());
+                    }
+
+                        mergeAdapter.addView(buildLabel());
+
+                    ArrayList<CategoryItem> gpsCats = setCatsAfterAsync(gpsItems, filter);
+                        CategoriesAdapter gpsAdapter = new CategoriesAdapter(getActivity(), gpsItems);
+                    mergeAdapter.addAdapter(gpsAdapter);
+
+
+
+
+
                     categoriesList.setAdapter(mergeAdapter);
                     Log.d(TAG, "No search test, setting adapter to MergeAdapter");
                 }
 
                 categoriesAdapter.notifyDataSetChanged();
+
+
+
                 setCatsAfterAsync(resultsList, filter);
             }
         };
