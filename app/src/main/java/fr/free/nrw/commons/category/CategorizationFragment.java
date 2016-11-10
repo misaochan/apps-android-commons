@@ -311,13 +311,7 @@ public class CategorizationFragment extends Fragment {
             protected void onPostExecute(ArrayList<String> result) {
                 super.onPostExecute(result);
 
-                results.addAll(result);
-                Log.d(TAG, "Prefix result: " + result);
 
-                filter = categoriesFilter.getText().toString();
-                ArrayList<String> resultsList = new ArrayList<String>(results);
-                categoriesCache.put(filter, resultsList);
-                Log.d(TAG, "Final results List: " + resultsList);
 
                 //TODO: New
                 if(TextUtils.isEmpty(filter)) {
@@ -361,6 +355,14 @@ public class CategorizationFragment extends Fragment {
                     Log.d(TAG, "No search test, setting adapter to MergeAdapter");
                     return;
                 }
+
+                results.addAll(result);
+                Log.d(TAG, "Prefix result: " + result);
+
+                filter = categoriesFilter.getText().toString();
+                ArrayList<String> resultsList = new ArrayList<String>(results);
+                categoriesCache.put(filter, resultsList);
+                Log.d(TAG, "Final results List: " + resultsList);
 
                 categoriesAdapter.notifyDataSetChanged();
 
