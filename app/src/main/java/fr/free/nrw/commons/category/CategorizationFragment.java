@@ -344,7 +344,17 @@ public class CategorizationFragment extends Fragment {
                         Log.e(TAG, "Interrupted Exception: ", e);
                     }
 
+                    ArrayList<CategoryItem> titleCats = new ArrayList<>(stringsToCategoryItems(titleItems));
+                    CategoriesAdapter titleAdapter = new CategoriesAdapter(getActivity(), titleCats);
 
+                    mergeAdapter.addView(buildLabel());
+                    mergeAdapter.addAdapter(titleAdapter);
+
+                    ArrayList<CategoryItem> recentCats = new ArrayList<>(stringsToCategoryItems(recentItems));
+                    CategoriesAdapter recentAdapter = new CategoriesAdapter(getActivity(), recentCats);
+
+                    mergeAdapter.addView(buildLabel());
+                    mergeAdapter.addAdapter(recentAdapter);
 
                     categoriesList.setAdapter(mergeAdapter);
                     Log.d(TAG, "No search test, setting adapter to MergeAdapter");
