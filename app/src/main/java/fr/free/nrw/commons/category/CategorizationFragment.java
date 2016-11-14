@@ -370,6 +370,7 @@ public class CategorizationFragment extends Fragment {
         requestSearchResults();
     }
 
+    //Returns number of selected categories to ShareActivity.java
     public int getCurrentSelectedCount() {
         int count = 0;
         for(CategoryItem item: categoriesAdapter.getItems()) {
@@ -380,6 +381,7 @@ public class CategorizationFragment extends Fragment {
         return count;
     }
 
+    //Looks up recent categories
     private Category lookupCategory(String name) {
         Cursor cursor = null;
         try {
@@ -410,6 +412,7 @@ public class CategorizationFragment extends Fragment {
         return cat;
     }
 
+    //Update table of recent categories
     private class CategoryCountUpdater extends AsyncTask<Void, Void, Void> {
 
         private String name;
@@ -459,12 +462,9 @@ public class CategorizationFragment extends Fragment {
             categoriesCache = (HashMap<String, ArrayList<String>>) savedInstanceState.getSerializable("categoriesCache");
         }
 
-
         //Create mergeAdapter to merge header views with categories adapter
-        mergeAdapter=new MergeAdapter();
+        mergeAdapter = new MergeAdapter();
         categoriesAdapter = new CategoriesAdapter(getActivity(), items);
-
-
 
         //TODO: Set adapter to MergeAdapter instead. Must pour contents in first.
         categoriesList.setAdapter(categoriesAdapter);
