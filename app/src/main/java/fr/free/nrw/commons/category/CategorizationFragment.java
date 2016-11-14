@@ -236,7 +236,7 @@ public class CategorizationFragment extends Fragment {
                     categoriesNotFoundView.setVisibility(View.VISIBLE);
                 }
             } else {
-                Log.d(TAG, "Smooth scrolling to position");
+                Log.d(TAG, "Smooth scrolling to position " + items.size());
                 categoriesList.smoothScrollToPosition(items.size());
             }
         }
@@ -281,8 +281,9 @@ public class CategorizationFragment extends Fragment {
                 filter = categoriesFilter.getText().toString();
                 super.onPostExecute(result);
 
-                //TODO: New
-                //If no text in search box, return GPS, Title, and Recent cats
+                //FIXME: Putting selected items on top works in categoriesAdapter (text search) but not mergeAdapter (empty text)
+                //If no text in search box, attach listview to mergeAdapter, which displays GPS, Title, and Recent cats with headers
+                //Otherwise, attach to categoriesAdapter (searched items, no headers)
                 if(TextUtils.isEmpty(filter)) {
 
                     ArrayList<String> gpsItems = new ArrayList<String>();
@@ -321,7 +322,7 @@ public class CategorizationFragment extends Fragment {
 
                     mergeAdapter.notifyDataSetChanged();
                     categoriesList.setAdapter(mergeAdapter);
-                    Log.d(TAG, "No search test, setting adapter to MergeAdapter");
+                    Log.d(TAG, "No search text, setting adapter to MergeAdapter");
 
                     categoriesSearchInProgress.setVisibility(View.GONE);
                     return;
