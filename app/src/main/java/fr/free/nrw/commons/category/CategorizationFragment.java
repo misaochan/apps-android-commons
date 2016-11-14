@@ -197,6 +197,7 @@ public class CategorizationFragment extends Fragment {
         Log.d(TAG, "stringsToCategoryItems() called");
         ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
 
+        //FIXME: This only calls getItems() on categoriesAdapter, not mergeAdapter
         for (CategoryItem item : categoriesAdapter.getItems()) {
             if (item.selected) {
                 items.add(item);
@@ -209,6 +210,7 @@ public class CategorizationFragment extends Fragment {
             }
         }
 
+        Log.d(TAG, "Existing keys " + existingKeys);
         return items;
     }
 
@@ -282,7 +284,8 @@ public class CategorizationFragment extends Fragment {
                 filter = categoriesFilter.getText().toString();
                 super.onPostExecute(result);
 
-                //FIXME: Selected items on top works in categoriesAdapter (text search) but not mergeAdapter (empty text)
+                //FIXME: Selected items on top works in categoriesAdapter (text search) but not mergeAdapter (empty text).
+                //FIXME: stringstoCategoryItems() is called here, but selected items are not added to existingKeys.
                 //If no text in search box, attach listview to mergeAdapter, which displays GPS, Title, and Recent cats with headers
                 if(TextUtils.isEmpty(filter)) {
 
