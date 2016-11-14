@@ -187,6 +187,11 @@ public class CategorizationFragment extends Fragment {
         return items;
     }
 
+    /**
+     * Converts strings to category items. Also adds selected items to existingKeys.
+     * @param categories
+     * @return
+     */
     private ArrayList<CategoryItem> stringsToCategoryItems(ArrayList<String> categories) {
         Log.d(TAG, "stringsToCategoryItems() called");
         ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
@@ -207,7 +212,7 @@ public class CategorizationFragment extends Fragment {
     }
 
     /**
-     * Displays categories found to the user as they type in the search box
+     * Displays categories found to the user as they type in the search box.
      * @param categories a list of all categories found for the search string
      * @param filter the search string
      */
@@ -231,6 +236,7 @@ public class CategorizationFragment extends Fragment {
                     categoriesNotFoundView.setVisibility(View.VISIBLE);
                 }
             } else {
+                Log.d(TAG, "Smooth scrolling to position");
                 categoriesList.smoothScrollToPosition(items.size());
             }
         }
