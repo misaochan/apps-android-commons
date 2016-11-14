@@ -83,6 +83,7 @@ public class CategorizationFragment extends Fragment {
 
     protected MergeAdapter mergeAdapter;
     private String filter;
+    private HashSet<String> existingKeys = new HashSet<String>();
 
     private ContentProviderClient client;
 
@@ -195,7 +196,7 @@ public class CategorizationFragment extends Fragment {
     private ArrayList<CategoryItem> stringsToCategoryItems(ArrayList<String> categories) {
         Log.d(TAG, "stringsToCategoryItems() called");
         ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
-        HashSet<String> existingKeys = new HashSet<String>();
+
         for (CategoryItem item : categoriesAdapter.getItems()) {
             if (item.selected) {
                 items.add(item);
@@ -271,7 +272,7 @@ public class CategorizationFragment extends Fragment {
                     Log.w(TAG, e);
                     //Thread.currentThread().interrupt();
                 }
-                //FIXME: This gets called even when there is text in search box. But needs to be in doInBackground in order to get results
+                //This gets called even when there is text in search box. But needs to be in doInBackground in order to get results
                 titleItems = new ArrayList<String>(titleCatQuery());
                 return result;
             }
