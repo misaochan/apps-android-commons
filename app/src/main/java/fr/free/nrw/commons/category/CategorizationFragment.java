@@ -281,9 +281,9 @@ public class CategorizationFragment extends Fragment {
                 filter = categoriesFilter.getText().toString();
                 super.onPostExecute(result);
 
-                //FIXME: Putting selected items on top works in categoriesAdapter (text search) but not mergeAdapter (empty text)
+                //FIXME: Selected items on top works in categoriesAdapter (text search) but not mergeAdapter (empty text)
                 //If no text in search box, attach listview to mergeAdapter, which displays GPS, Title, and Recent cats with headers
-                //Otherwise, attach to categoriesAdapter (searched items, no headers)
+
                 if(TextUtils.isEmpty(filter)) {
 
                     ArrayList<String> gpsItems = new ArrayList<String>();
@@ -320,28 +320,32 @@ public class CategorizationFragment extends Fragment {
                     mergeAdapter.addView(buildRecentLabel());
                     mergeAdapter.addAdapter(recentAdapter);
 
+                    //TODO: Add the existing keys from both sides
+
                     mergeAdapter.notifyDataSetChanged();
                     categoriesList.setAdapter(mergeAdapter);
                     Log.d(TAG, "No search text, setting adapter to MergeAdapter");
 
                     categoriesSearchInProgress.setVisibility(View.GONE);
                     return;
+                } else {
+                    //Otherwise, attach to categoriesAdapter (searched items, no headers)
+                    results.addAll(result);
+                    Log.d(TAG, "Prefix result: " + result);
+
+                    ArrayList<String> resultsList = new ArrayList<String>(results);
+                    categoriesCache.put(filter, resultsList);
+                    Log.d(TAG, "Final results List: " + resultsList);
+
+                    setCatsAfterAsync(resultsList, filter);
+
+                    Log.d(TAG, "Number of items in categoriesAdapter: " + categoriesAdapter.getCount());
+
+
+                    categoriesList.setAdapter(categoriesAdapter);
+                    categoriesAdapter.notifyDataSetChanged();
+                    return;
                 }
-
-                results.addAll(result);
-                Log.d(TAG, "Prefix result: " + result);
-
-                ArrayList<String> resultsList = new ArrayList<String>(results);
-                categoriesCache.put(filter, resultsList);
-                Log.d(TAG, "Final results List: " + resultsList);
-
-                setCatsAfterAsync(resultsList, filter);
-                
-                Log.d(TAG, "Number of items in categoriesAdapter: " + categoriesAdapter.getCount());
-
-
-                categoriesList.setAdapter(categoriesAdapter);
-                categoriesAdapter.notifyDataSetChanged();
 
             }
         };
