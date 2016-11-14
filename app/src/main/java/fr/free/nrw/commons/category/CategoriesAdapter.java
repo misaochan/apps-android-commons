@@ -25,8 +25,6 @@ public class CategoriesAdapter extends BaseAdapter {
     //FIXME: Might have issue here, headers need to be a String type so you can't just add them to an ArrayList of CategoryItem
     private ArrayList<CategorizationFragment.CategoryItem> items;
 
-    private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
-
     public CategoriesAdapter(Context context, ArrayList<CategorizationFragment.CategoryItem> items) {
         this.context = context;
         this.items = items;
@@ -51,17 +49,6 @@ public class CategoriesAdapter extends BaseAdapter {
 
     public long getItemId(int i) {
         return i;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        // If type is 1, the line is a header, otherwise it is an item
-        return sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 2;
     }
 
     public View getView(int i, View view, ViewGroup viewGroup) {
