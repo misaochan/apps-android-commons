@@ -283,7 +283,6 @@ public class CategorizationFragment extends Fragment {
 
                 //FIXME: Selected items on top works in categoriesAdapter (text search) but not mergeAdapter (empty text)
                 //If no text in search box, attach listview to mergeAdapter, which displays GPS, Title, and Recent cats with headers
-
                 if(TextUtils.isEmpty(filter)) {
 
                     ArrayList<String> gpsItems = new ArrayList<String>();
@@ -322,8 +321,9 @@ public class CategorizationFragment extends Fragment {
 
                     //TODO: Add the existing keys from both sides
 
-                    mergeAdapter.notifyDataSetChanged();
+
                     categoriesList.setAdapter(mergeAdapter);
+                    mergeAdapter.notifyDataSetChanged();
                     Log.d(TAG, "No search text, setting adapter to MergeAdapter");
 
                     categoriesSearchInProgress.setVisibility(View.GONE);
