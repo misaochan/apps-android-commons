@@ -81,36 +81,4 @@ public class CategoriesAdapter extends BaseAdapter {
 
         return checkedView;
     }
-
-    /*
-    // TODO: Separator getView reference
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        int rowType = getItemViewType(position);
-
-        if (convertView == null) {
-            holder = new ViewHolder();
-            switch (rowType) {
-                case TYPE_ITEM:
-                    convertView = mInflater.inflate(R.layout.snippet_item1, null);
-                    holder.textView = (TextView) convertView.findViewById(R.id.text);
-                    break;
-                case TYPE_SEPARATOR:
-                    convertView = mInflater.inflate(R.layout.snippet_item2, null);
-                    holder.textView = (TextView) convertView.findViewById(R.id.textSeparator);
-                    break;
-            }
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        holder.textView.setText(mData.get(position));
-
-        return convertView;
-    }
-
-    public static class ViewHolder {
-        public TextView textView;
-    }
-    */
 }

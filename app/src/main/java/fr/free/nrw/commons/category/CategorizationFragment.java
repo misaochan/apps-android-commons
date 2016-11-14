@@ -187,50 +187,6 @@ public class CategorizationFragment extends Fragment {
         return items;
     }
 
-    /**
-     * Merges nearby categories, categories suggested based on title, and recent categories... without duplicates.
-     * @return a list containing merged categories
-
-    protected ArrayList<String> mergeItems() {
-
-        Set<String> mergedItems = new LinkedHashSet<String>();
-
-
-        Log.d(TAG, "Calling APIs for GPS cats, title cats and recent cats...");
-
-        List<String> gpsItems = new ArrayList<String>();
-        if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
-            gpsItems.addAll(MwVolleyApi.getGpsCat());
-        }
-        List<String> titleItems = new ArrayList<String>(titleCatQuery());
-        List<String> recentItems = new ArrayList<String>(recentCatQuery());
-
-        //Await results of titleItems, which is likely to come in last
-        try {
-            mergeLatch.await(5L, TimeUnit.SECONDS);
-            Log.d(TAG, "Waited for merge");
-        } catch (InterruptedException e) {
-            Log.e(TAG, "Interrupted Exception: ", e);
-        }
-
-
-        //FIXME: Remove this later
-        mergedItems.addAll(gpsItems);
-        Log.d(TAG, "Adding GPS items: " + gpsItems);
-
-        mergedItems.addAll(titleItems);
-        Log.d(TAG, "Adding title items: " + titleItems);
-        mergedItems.addAll(recentItems);
-        Log.d(TAG, "Adding recent items: " + recentItems);
-        
-        //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
-        ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
-
-        Log.d(TAG, "Merged item list: " + mergedItemsList);
-        return mergedItemsList;
-    }
-    */
-
     private ArrayList<CategoryItem> stringsToCategoryItems(ArrayList<String> categories) {
         Log.d(TAG, "stringsToCategoryItems() called");
         ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
@@ -543,7 +499,6 @@ public class CategorizationFragment extends Fragment {
         return rootView;
     }
 
-    //FIXME: For debugging
     private View buildGpsLabel() {
         TextView result=new TextView(getActivity());
         result.setText("GPS items");
