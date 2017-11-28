@@ -70,14 +70,12 @@
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="categories_skip_explanation">Amieste categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\n\nPrincipie a escribir p\'amestar categoríes.\nToque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
   <string name="categories_activity_title">Categoríes</string>
-  <string name="preference_tracking">Informes d\'usu</string>
-  <string name="preference_tracking_summary">Unviar informes d\'usu a Wikimedia p\'ayudanos a ameyorar l\'aplicación</string>
   <string name="title_activity_settings">Configuración</string>
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="menu_about">Tocante a</string>
-  <string name="about_license">Software de códigu abiertu lliberáu baxo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Llicencia Apache v2&lt;/a&gt;. %1$s ya\'l so logotipu son marques rexistraes de la Fundación Wikimedia y utilícense col so permisu. Nun tamos acreditaos pola Fundación Wikimedia nin tamos afiliaos con ella.</string>
+  <string name="about_license">La app de Wikimedia Commons ye software de códigu abiertu, creáu y calteníu por becaos y voluntarios de la comunidá de Wikimedia. La Fundación Wikimedia nun participa na creación, desendolcu nin caltenimientu de la app.</string>
   <string name="about_improve">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
-  <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ast</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política d\'intimidá&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Tocante a</string>
   <string name="menu_feedback">Unviar comentarios (per corréu)</string>
@@ -88,6 +86,7 @@
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Encaboxar</string>
   <string name="share_license_summary">Esta imaxe quedará baxo la llicencia %1$s</string>
+  <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia</string>
   <string name="use_previous">Usar un títulu/descripción anterior</string>
@@ -135,7 +134,8 @@
   <string name="detail_description_empty">Ensin descripción</string>
   <string name="detail_license_empty">Llicencia desconocida</string>
   <string name="menu_refresh">Refrescar</string>
-  <string name="storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
+  <string name="read_storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
+  <string name="write_storage_permission_rationale">Permisu riquíu: escritura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
   <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
   <string name="ok">Aceutar</string>
   <string name="title_activity_nearby">Llugares cercanos</string>
@@ -147,7 +147,7 @@
   <string name="media_detail_title">Títulu</string>
   <string name="media_detail_media_title">Títulu del mediu</string>
   <string name="media_detail_description">Descripción</string>
-  <string name="media_detail_description_explanation">Equí va la descripción del mediu. Posiblemente pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea guapo.</string>
+  <string name="media_detail_description_explanation">Equí va la descripción del mediu. Esto pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea bien.</string>
   <string name="media_detail_uploaded_date">Data d\'unviu</string>
   <string name="media_detail_license">Llicencia</string>
   <string name="media_detail_coordinates">Coordenaes</string>
@@ -193,4 +193,12 @@
   <string name="nearby_info_menu_commons_article">Páxina del ficheru en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elementu de WikiData</string>
   <string name="error_while_cache">Error al poner les fotos na caché</string>
+  <string name="title_info">Un títulu descriptivu únicu pal ficheru, que sirvirá para da-y nome al ficheru. Se pue usar llinguax normal con espacios. Nun amiestes la estensión del ficheru</string>
+  <string name="description_info">Por favor, describi l\'elementu multimedia tantu como sía posible: ¿ónde se tomó?, ¿qué amuesa?, ¿cuál ye\'l contestu? Por favor, describi los oxetos o persones. Revela la información que nun pueda aldovinase de mou cenciellu, por casu el momentu del día si ye un paisaxe. Si\'l mediu amuesa daqué desacostumao, esplica qué lo fai raro.</string>
+  <string name="give_permission">Dar permisu</string>
+  <string name="use_external_storage">Usar almacenamientu esternu</string>
+  <string name="use_external_storage_summary">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
+  <string name="send_log_file">Unviar ficheru de rexistru</string>
+  <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu</string>
+  <string name="login_to_your_account">Anicia sesión na to cuenta</string>
 </resources>
