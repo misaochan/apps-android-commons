@@ -8,12 +8,15 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -58,6 +61,8 @@ import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -687,7 +692,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
 
                 storeSharedPrefs();
-                directUpload.initiateCameraUpload();
+                initiateCameraUpload();
             }
         });
 
@@ -697,11 +702,62 @@ public class NearbyMapFragment extends DaggerFragment {
 
 
                 storeSharedPrefs();
-                directUpload.initiateGalleryUpload();
+                initiateGalleryUpload();
             }
         });
     }
 
+
+    void initiateCameraUpload() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(getActivity(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(getActivity().getString(R.string.write_storage_permission_rationale))
+                            .setPositiveButton("OK", (dialog, which) -> {
+                                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .create()
+                            .show();
+                } else {
+                    requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
+                }
+            } else {
+                controller.startCameraCapture();
+            }
+        } else {
+            controller.startCameraCapture();
+        }
+    }
+
+    void initiateGalleryUpload() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(getActivity(), READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(getActivity().getString(R.string.read_storage_permission_rationale))
+                            .setPositiveButton("OK", (dialog, which) -> {
+                                Timber.d("Requesting permissions for read external storage");
+                                requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .create()
+                            .show();
+                } else {
+                    requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
+                            1);
+                }
+            } else {
+                controller.startGalleryPick();
+            }
+        }
+        else {
+            controller.startGalleryPick();
+        }
+    }
     void storeSharedPrefs() {
         SharedPreferences.Editor editor = directPrefs.edit();
         editor.putString("Title", place.getName());
