@@ -57,6 +57,7 @@ import javax.inject.Named;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.ViewUtil;
 import timber.log.Timber;
@@ -66,7 +67,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class NearbyMapFragment extends DaggerFragment {
+public class NearbyMapFragment extends CommonsDaggerSupportFragment {
 
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
@@ -103,7 +104,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Animation fab_open;
     private Animation rotate_forward;
     private ContributionController controller;
-    private DirectUpload directUpload;
+    //private DirectUpload directUpload;
 
     private Place place;
     private Marker selected;
@@ -129,7 +130,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        directUpload = new DirectUpload(this, controller);
+        //directUpload = new DirectUpload(this, controller);
         controller = new ContributionController(this);
 
         Bundle bundle = this.getArguments();
