@@ -737,7 +737,7 @@ public class NearbyMapFragment extends DaggerFragment {
             if (ContextCompat.checkSelfPermission(getActivity(), READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
                 if (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
                     new AlertDialog.Builder(getActivity())
-                            .setMessage(getActivity().getString(R.string.read_storage_permission_rationale))
+                            .setMessage(getString(R.string.read_storage_permission_rationale))
                             .setPositiveButton("OK", (dialog, which) -> {
                                 Timber.d("Requesting permissions for read external storage");
                                 requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
