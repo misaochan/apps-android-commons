@@ -117,6 +117,7 @@ public class Utils {
      * @return File with correct extension
      */
     public static String fixExtension(String title, String extension) {
+        Timber.d("fixExtension method called");
         Pattern jpegPattern = Pattern.compile("\\.jpeg$", Pattern.CASE_INSENSITIVE);
 
         // People are used to ".jpg" more than ".jpeg" which the system gives us.
@@ -128,6 +129,7 @@ public class Utils {
                 .endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
             title += "." + extension;
         }
+        Timber.d("fixExtension returns title: " + title);
         return title;
     }
 

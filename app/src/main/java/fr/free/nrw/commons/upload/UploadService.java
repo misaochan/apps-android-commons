@@ -222,7 +222,9 @@ public class UploadService extends HandlerService<Contribution> {
 
         String filename = null;
         try {
+            Timber.d("Filename passed to fixExtension: " + contribution.getFilename());
             filename = Utils.fixExtension(contribution.getFilename(), MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
+            Timber.d("New filename after fixExtension: " + filename);
 
             synchronized (unfinishedUploads) {
                 Timber.d("making sure of uniqueness of name: %s", filename);
@@ -320,7 +322,11 @@ public class UploadService extends HandlerService<Contribution> {
                     Timber.d("SequenceFileName " + sequenceFileName);
                 }
             }
+            boolean fewm = mwApi.fileExistsWithName(sequenceFileName);
+            boolean ufuc = unfinishedUploads.contains(sequenceFileName);
+            Timber.d("FileExistsWithName is " + fewm + "and UnfinishedUplosds contains " + ufuc);
             if (!mwApi.fileExistsWithName(sequenceFileName) && !unfinishedUploads.contains(sequenceFileName)) {
+                // This is called prematurely when file is a .jpeg
                 Timber.d("Breaking loop");
                 break;
             }
