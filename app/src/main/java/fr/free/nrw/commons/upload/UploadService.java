@@ -222,9 +222,7 @@ public class UploadService extends HandlerService<Contribution> {
 
         String filename = null;
         try {
-            filename = Utils.fixExtension(
-                    contribution.getFilename(),
-                    MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
+            filename = Utils.fixExtension(contribution.getFilename(), MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
 
             synchronized (unfinishedUploads) {
                 Timber.d("making sure of uniqueness of name: %s", filename);
@@ -304,23 +302,30 @@ public class UploadService extends HandlerService<Contribution> {
         String sequenceFileName;
         for (int sequenceNumber = 1; true; sequenceNumber++) {
             if (sequenceNumber == 1) {
+                Timber.d("Sequence number is 1");
                 sequenceFileName = fileName;
+                Timber.d("SequenceFileName " + sequenceFileName);
             } else {
                 if (fileName.indexOf('.') == -1) {
+                    Timber.d("Filename does not have a '.'");
                     // We really should have appended a file type suffix already.
                     // But... we might not.
                     sequenceFileName = fileName + " " + sequenceNumber;
+                    Timber.d("SequenceFileName " + sequenceFileName);
                 } else {
+                    Timber.d("Filename has a '.'");
                     Pattern regex = Pattern.compile("^(.*)(\\..+?)$");
                     Matcher regexMatcher = regex.matcher(fileName);
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
+                    Timber.d("SequenceFileName " + sequenceFileName);
                 }
             }
-            if (!mwApi.fileExistsWithName(sequenceFileName)
-                    && !unfinishedUploads.contains(sequenceFileName)) {
+            if (!mwApi.fileExistsWithName(sequenceFileName) && !unfinishedUploads.contains(sequenceFileName)) {
+                Timber.d("Breaking loop");
                 break;
             }
         }
+        Timber.d("Returning " + sequenceFileName);
         return sequenceFileName;
     }
 }
