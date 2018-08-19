@@ -223,6 +223,7 @@ public class UploadService extends HandlerService<Contribution> {
         String filename = null;
         try {
             Timber.d("Filename passed to fixExtension: " + contribution.getFilename());
+            Timber.d("Extension passed to fixExtension: " + MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
             filename = Utils.fixExtension(contribution.getFilename(), MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
             Timber.d("New filename after fixExtension: " + filename);
 
