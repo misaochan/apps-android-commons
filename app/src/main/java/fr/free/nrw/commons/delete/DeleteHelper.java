@@ -59,7 +59,7 @@ public class DeleteHelper {
      * @return
      */
     public Single<Boolean> makeDeletion(Context context, Media media, String reason) {
-        viewUtil.showShortToast(context, context.getString((R.string.delete_helper_make_deletion_toast), media.getDisplayTitle()));
+        viewUtil.showShortToast(context, "Trying to nominate " + media.getDisplayTitle() + " for deletion");
         return Single.fromCallable(() -> delete(media, reason))
                 .flatMap(result -> Single.fromCallable(() ->
                         showDeletionNotification(context, media, result)));
@@ -203,7 +203,7 @@ public class DeleteHelper {
                     });
 
         });
-        alert.setNegativeButton(context.getString(R.string.cancel), (dialog, which) -> reviewCallback.onFailure());
+        alert.setNegativeButton("Cancel", (dialog, which) -> reviewCallback.onFailure());
         AlertDialog d = alert.create();
         d.show();
     }
